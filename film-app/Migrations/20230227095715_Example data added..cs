@@ -29,7 +29,7 @@ namespace film_app.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Tytul = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Rezyser = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Opis = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Opis = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
                     Cena = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     DataDodania = table.Column<DateTime>(type: "datetime2", nullable: false),
                     KategoriaId = table.Column<int>(type: "int", nullable: false)

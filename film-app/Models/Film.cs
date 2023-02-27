@@ -19,7 +19,7 @@ namespace film_app.Models
         public string Rezyser { get; set; }
 
         [Required(ErrorMessage = "Wpisz opis")]
-        [StringLength(200)]
+        [StringLength(1000)]
         public string Opis { get; set; }
         public decimal? Cena { get; set; }
         public DateTime DataDodania { get; set; }

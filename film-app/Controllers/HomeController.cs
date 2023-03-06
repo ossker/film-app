@@ -1,4 +1,5 @@
-﻿using film_app.Models;
+﻿using film_app.DAL;
+using film_app.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,16 +12,26 @@ namespace film_app.Controllers
 {
     public class HomeController : Controller
     {
+        /*
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
+        */
+        
+        FilmyContext db;
+
+        public HomeController(FilmyContext db)
+        {
+            this.db = db;
+        }
 
         public IActionResult Index()
         {
-            return View();
+            var kategoria = db.Kategorie.ToList();
+            return View(kategoria);
         }
 
         public IActionResult Privacy()
@@ -32,6 +43,11 @@ namespace film_app.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult StronyStatyczne(string nazwa)
+        {
+            return View(nazwa);
         }
     }
 }

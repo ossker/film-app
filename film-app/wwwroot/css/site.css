@@ -1,4 +1,5 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+﻿
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
@@ -69,3 +70,27 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+.menu-bar {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    background-color: #fff;
+    height: 6rem;
+}
+
+.menu {
+    display: flex;
+    flex-direction: row;
+}
+
+.menu-link {
+    display: block;
+    padding: 1rem 0;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    text-decoration: none;
+    margin-right: 3px;
+    margin: 5px;
+}
+

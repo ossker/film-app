@@ -1,0 +1,37 @@
+﻿@model IEnumerable<film_app.Models.Film>
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = ViewBag.nazwa;
+}
+
+
+<div class="text-center">
+    Lista filmow w Kategorii @ViewBag.nazwa
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Tytuł filmu</th>
+            <th>Reżyser</th>
+            <th>Opis</th>
+            <th>Data dodania</th>
+            <th>Cena</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var film in Model)
+        {
+            <tr>
+                <td>@film.Tytul</td>
+                <td>@film.Rezyser</td>
+                <td>@film.Opis</td>
+                <td>@film.DataDodania.ToString()</td>
+                <td>@film.Cena</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+

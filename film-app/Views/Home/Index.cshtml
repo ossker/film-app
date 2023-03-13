@@ -2,14 +2,6 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-<header class="menu-bar">
-    <nav class="menu">
-        @foreach (var kategoria in Model)
-        {
-            <a href="@Url.Action("Lista", "Filmy", new{nazwaKategorii=@kategoria.Nazwa.ToUpper()})" class="menu-link">@kategoria.Nazwa</a>
-        }
-    </nav>
-</header>
 <div class="text-center">
     Home Page
 </div>

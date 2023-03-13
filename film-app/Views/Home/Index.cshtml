@@ -2,11 +2,11 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-<header>
-    <nav>
+<header class="menu-bar">
+    <nav class="menu">
         @foreach(var kategoria in Model)
         {
-            <a href="#">@kategoria.Nazwa</a>
+            <a href="#" class="menu-link">@kategoria.Nazwa</a>
         }
     </nav>
 </header>

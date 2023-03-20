@@ -1,4 +1,4 @@
-﻿@model IEnumerable<film_app.Models.Film>
+﻿@model KategoriaViewModel
 @{
     Layout = "_Layout";
     ViewData["Title"] = ViewBag.nazwa;
@@ -15,19 +15,21 @@
             <th>Tytuł filmu</th>
             <th>Reżyser</th>
             <th>Opis</th>
+            <th>Czas Trwania</th>
             <th>Data dodania</th>
             <th>Cena</th>
         </tr>
     </thead>
     <tbody>
-        @foreach(var film in Model)
+        @foreach(var film in Model.FilmyNajnowsze)
         {
             <tr>
-                <td>@film.Tytul</td>
+                <td><a href="@Url.Action("Szczegoly", "Filmy", new {id = @film.Id})">@film.Tytul</a></td>
                 <td>@film.Rezyser</td>
                 <td>@film.Opis</td>
-                <td>@film.DataDodania.ToString()</td>
-                <td>@film.Cena</td>
+                <td>@((film.czasTrwania != null)? (film.czasTrwania+"min."): "")</td>
+                <td>@film.DataDodania.ToShortDateString()</td>
+                <td>@((film.Cena != null)? (film.Cena+"zł"): "")</td>
             </tr>
         }
     </tbody>

@@ -1,0 +1,31 @@
+﻿@model Film
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = ViewBag.nazwa;
+}
+<div class="text-center">
+    <p class="lista-filmow-tytul">Szczegoły filmu @Model.Tytul</p>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Tytuł filmu</th>
+            <th>Reżyser</th>
+            <th>Opis</th>
+            <th>Czas Trwania</th>
+            <th>Data dodania</th>
+            <th>Cena</th>
+        </tr>
+    </thead>
+    <tbody>
+            <tr>
+                <td>@Model.Tytul</td>
+                <td>@Model.Rezyser</td>
+                <td>@Model.Opis</td>
+                <td>@Model.czasTrwania</td>
+                <td>@Model.DataDodania</td>
+                <td>@Model.Cena</td>
+            </tr>
+    </tbody>
+</table>

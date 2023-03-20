@@ -27,5 +27,7 @@ namespace film_app.Models
         public int KategoriaId { get; set; }
         public Kategoria Kategoria { get; set; }
 
+        public int? czasTrwania { get; set; }
+
     }
 }

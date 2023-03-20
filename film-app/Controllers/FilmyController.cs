@@ -30,5 +30,12 @@ namespace film_app.Controllers
 
             return View(filmy);
         }
+
+        public IActionResult Szczegoly(int id)
+        {
+            var film = db.Filmy.Where(k => k.Id == id).Single();
+            ViewBag.nazwa = film.Tytul;
+            return View(film);
+        }
      }
 }

@@ -52,6 +52,11 @@ namespace film_app
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                    name: "Szczegoly",
+                    pattern: "film/{id}",
+                    defaults: new { controller = "Filmy", action = "Szczegoly" });
+
+                endpoints.MapControllerRoute(
                     name: "ListaFilmow",
                     pattern: "kategoria/{nazwa}",
                     defaults: new { controller = "Filmy", action = "Lista" });

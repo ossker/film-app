@@ -1,0 +1,16 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<header class="">
+    <nav class="">
+        <ul>
+            @foreach(var film in Model)
+            {
+                <li><a href="@Url.Action("Szczegoly", "Filmy", new {id = @film.Id})">@film.Tytul</a></li>
+            }
+        </ul>
+    </nav>
+</header>

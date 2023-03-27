@@ -3,29 +3,25 @@
     Layout = "_Layout";
     ViewData["Title"] = ViewBag.nazwa;
 }
+
 <div class="text-center">
     <p class="lista-filmow-tytul">Szczegoły filmu @Model.Tytul</p>
 </div>
+@(await Component.InvokeAsync("FilmyKategorii", new{nazwaKategorii = @Model.Kategoria.Nazwa.ToUpper()}))
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Tytuł filmu</th>
-            <th>Reżyser</th>
-            <th>Opis</th>
-            <th>Czas Trwania</th>
-            <th>Data dodania</th>
-            <th>Cena</th>
-        </tr>
-    </thead>
-    <tbody>
-            <tr>
-                <td>@Model.Tytul</td>
-                <td>@Model.Rezyser</td>
-                <td>@Model.Opis</td>
-                <td>@Model.czasTrwania</td>
-                <td>@Model.DataDodania</td>
-                <td>@Model.Cena</td>
-            </tr>
-    </tbody>
+<table>
+    <tr>
+        <td>
+            <h1>@Model.Kategoria.Nazwa</h1>
+        </td>
+        <td>
+                <ul>
+                    <li>Tytul: @Model.Tytul</li>
+                    <li>Rezyser: @Model.Rezyser</li>
+                    <li>Opis: @Model.Opis</li>
+                    <li>Czas trwania: @Model.czasTrwania</li>
+                    <li>Cena: @Model.Cena</li>
+                </ul>
+        </td>
+    </tr>
 </table>

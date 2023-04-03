@@ -3,12 +3,17 @@
     
 }
 
-<header class="menu-bar">
-    <nav class="menu">
-        @foreach(var kategoria in Model)
-        {
-            <a class href="@Url.Action("Lista", "Filmy", new{nazwaKategorii=@kategoria.Nazwa.ToUpper()})" class="menu-link">@kategoria.Nazwa</a>
-        }
-        <a href="@Url.Action("DodajFilm", "Filmy")" class="menu-link">Dodaj Film</a>
-    </nav>
+<header class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="@Url.Action("Index", "Home")">Filmy</a>
+        <div class="collapse navbar-collapse" style="margin-left: 1rem">
+            <div class="navbar-nav">
+                @foreach(var kategoria in Model)
+                {
+                    <a class="btn btn-outline-info" type="button" style="margin-left:0.6rem" aria-current="page" href="@Url.Action("Lista", "Filmy", new{nazwaKategorii=@kategoria.Nazwa.ToUpper()})">@kategoria.Nazwa</a>
+                }
+                <a style="margin-left:2rem" href="@Url.Action("DodajFilm", "Filmy")" class="btn btn-outline-info">Dodaj Film</a>
+            </div>
+        </div>
+    </div>
 </header>

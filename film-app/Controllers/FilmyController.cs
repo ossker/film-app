@@ -1,7 +1,10 @@
 ﻿using film_app.DAL;
 using film_app.Models;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.IO;
 using System.Linq;
 
 namespace film_app.Controllers
@@ -9,10 +12,12 @@ namespace film_app.Controllers
     public class FilmyController : Controller
     {
         FilmyContext db;
+        IWebHostEnvironment hostingEnvironment;
 
-        public FilmyController(FilmyContext db)
+        public FilmyController(FilmyContext db, IWebHostEnvironment hostingEnvironment)
         {
             this.db = db;
+            this.hostingEnvironment = hostingEnvironment;
         }
 
         public IActionResult Lista(string nazwaKategorii)
@@ -37,5 +42,40 @@ namespace film_app.Controllers
             ViewBag.nazwa = film.Tytul;
             return View(film);
         }
-     }
+
+        [HttpGet]
+        public ActionResult DodajFilm()
+        {
+            DodawanieFilmowViewModel dodaj = new DodawanieFilmowViewModel();
+            var kategoria = db.Kategorie.ToList();
+
+            dodaj.kategoria = kategoria;
+
+            return View(dodaj);
+        }
+
+
+        [HttpPost]
+        public ActionResult DodajFilm(DodawanieFilmowViewModel obj)
+        {
+            obj.film.DataDodania = System.DateTime.Now;
+
+            var plakatFolderPath = Path.Combine(hostingEnvironment.WebRootPath, "content");
+
+            var unikatNazwaPlakatu = Guid.NewGuid() + "_" + obj.Plakat.FileName;
+
+            var plakatPath = Path.Combine(plakatFolderPath, unikatNazwaPlakatu);
+
+            obj.Plakat.CopyTo(new FileStream(plakatPath, FileMode.Create));
+
+            obj.film.Plakat = unikatNazwaPlakatu;
+
+            db.Filmy.Add(obj.film);
+
+            db.SaveChanges();
+
+            return RedirectToAction("DodajFilm");
+        }
+
+    }
 }

@@ -1,0 +1,49 @@
+﻿@model film_app.Models.DodawanieFilmowViewModel
+@{
+	Layout = "_Layout";
+	ViewData["Title"] = "Dodawanie filmu";
+}
+
+@using(Html.BeginForm("DodajFilm", "Filmy", FormMethod.Post, new{enctype = "multipart/form-data"}))
+{
+	<div class="form-group">
+		@Html.LabelFor(f=>f.film.Rezyser, "Podaj rezysera")
+		@Html.TextBoxFor(f=>f.film.Rezyser, new{@class="form-control"})
+	</div>
+
+	<div class="form-group">
+		@Html.LabelFor(f=>f.film.Tytul, "Podaj tytul")
+		@Html.TextBoxFor(f=>f.film.Tytul, new{@class="form-control"})
+	</div>
+
+	<div class="form-group">
+		@Html.LabelFor(f=>f.film.Opis, "Podaj opis")
+		@Html.TextBoxFor(f=>f.film.Opis, new{@class="form-control"})
+	</div>
+
+	<div class="form-group">
+		@Html.LabelFor(f=>f.film.Cena, "Podaj cene")
+		@Html.TextBoxFor(f=>f.film.Cena, new{@class="form-control"})
+	</div>
+
+	<div class="form-group">
+		@Html.LabelFor(f=>f.Plakat, "Wybierz plakat")
+		@Html.TextBoxFor(f=>f.Plakat, new{@type = "file", @class="form-control-file"})
+	</div>
+			
+			@foreach(var kategoria in Model.kategoria)
+			{
+				<div class="form-check-input">
+					@Html.RadioButtonFor(f=>f.film.KategoriaId,kategoria.Id) 
+				</div>
+				<div class="form-check-label">
+					@Html.LabelFor(f=>f.film.KategoriaId, @kategoria.Nazwa)
+				</div>
+			}
+
+
+	<div class="form-group">
+		<button type="submit" class="btn btn-primary">Dodaj</button>
+	</div>
+
+}

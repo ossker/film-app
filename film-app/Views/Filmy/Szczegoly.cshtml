@@ -1,28 +1,40 @@
 ﻿@model Film
 @{
     Layout = "_Layout";
-    ViewData["Title"] = ViewBag.nazwa;
+    ViewData["Title"] = Model.Tytul;
 }
 
 <div class="text-center">
     <p class="lista-filmow-tytul">Szczegoły filmu @Model.Tytul</p>
 </div>
-@(await Component.InvokeAsync("FilmyKategorii", new{nazwaKategorii = @Model.Kategoria.Nazwa.ToUpper()}))
 
-<table>
-    <tr>
-        <td>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
             <h1>@Model.Kategoria.Nazwa</h1>
-        </td>
-        <td>
-                <ul>
-                    <li>Tytul: @Model.Tytul</li>
-                    <li>Rezyser: @Model.Rezyser</li>
-                    <li>Opis: @Model.Opis</li>
-                    <li>Czas trwania: @Model.czasTrwania</li>
-                    <li>Cena: @Model.Cena</li>
-                    <li>Plakat: <img src="~/content/@Model.Plakat"/></li>
-                </ul>
-        </td>
-    </tr>
-</table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            @(await Component.InvokeAsync("FilmyKategorii", new{nazwaKategorii = @Model.Kategoria.Nazwa.ToUpper()}))
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-auto">
+            <img src="~/content/@Model.Plakat" style="height: 20rem"/>
+        </div>
+        <div class="col col-lg-8">
+            <ul class="list-group">
+                <li class="list-group-item">Tytul:<br/>@Model.Tytul</li>
+                <li class="list-group-item">Rezyser:<br/>@Model.Rezyser</li>
+                <li class="list-group-item">Opis:<br/>@Model.Opis</li>
+                <li class="list-group-item">Czas<br/>trwania: @Model.czasTrwania</li>
+                <li class="list-group-item">Cena:<br/>@Model.Cena</li>
+                <li class="list-group-item">Data dodania:<br/>@Model.DataDodania</li>
+            </ul>
+        </div>
+    </div>
+</div>

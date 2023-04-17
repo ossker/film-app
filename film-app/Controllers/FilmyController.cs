@@ -94,5 +94,18 @@ namespace film_app.Controllers
             
         }
 
+        [HttpPost]
+        public IActionResult Szukaj(string tekst)
+        {
+            if (!String.IsNullOrEmpty(tekst))
+            {
+                var filmy = db.Filmy.Where(f=>f.Tytul.Contains(tekst));
+                ViewBag.Fraza = tekst;
+                filmy.ToList();
+                return View(filmy);
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
     }
 }

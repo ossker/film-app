@@ -60,21 +60,38 @@ namespace film_app.Controllers
         {
             obj.film.DataDodania = System.DateTime.Now;
 
-            var plakatFolderPath = Path.Combine(hostingEnvironment.WebRootPath, "content");
+            if(obj.film.Cena == null)
+            {
+                obj.film.Cena = 0.00m;
+            }
+            if(TryValidateModel(obj.film, "Film") && ModelState.IsValid)
+            {
+                var plakatFolderPath = Path.Combine(hostingEnvironment.WebRootPath, "content");
 
-            var unikatNazwaPlakatu = Guid.NewGuid() + "_" + obj.Plakat.FileName;
+                var unikatNazwaPlakatu = Guid.NewGuid() + "_" + obj.Plakat.FileName;
 
-            var plakatPath = Path.Combine(plakatFolderPath, unikatNazwaPlakatu);
+                var plakatPath = Path.Combine(plakatFolderPath, unikatNazwaPlakatu);
 
-            obj.Plakat.CopyTo(new FileStream(plakatPath, FileMode.Create));
+                obj.Plakat.CopyTo(new FileStream(plakatPath, FileMode.Create));
 
-            obj.film.Plakat = unikatNazwaPlakatu;
+                obj.film.Plakat = unikatNazwaPlakatu;
 
-            db.Filmy.Add(obj.film);
+                
 
-            db.SaveChanges();
+                db.Filmy.Add(obj.film);
 
-            return RedirectToAction("DodajFilm");
+                db.SaveChanges();
+
+                TempData["Dodaj"] = "Dodano film!";
+
+                return RedirectToAction("DodajFilm");
+            }
+
+            var kategoria = db.Kategorie.ToList();
+
+            obj.kategoria = kategoria;
+            return View(obj);
+            
         }
 
     }

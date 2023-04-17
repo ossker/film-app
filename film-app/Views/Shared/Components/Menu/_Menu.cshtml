@@ -13,6 +13,11 @@
                     <a class="btn btn-outline-info" type="button" style="margin-left:0.6rem" aria-current="page" href="@Url.Action("Lista", "Filmy", new{nazwaKategorii=@kategoria.Nazwa.ToUpper()})">@kategoria.Nazwa</a>
                 }
                 <a style="margin-left:2rem" href="@Url.Action("DodajFilm", "Filmy")" class="btn btn-outline-info">Dodaj Film</a>
+                @using(Html.BeginForm("Szukaj", "Filmy", FormMethod.Post, new{@class="form-inline"})){
+                    @Html.TextBox("tekst", null, new{@class="form-control mr-sm-2", type="search", placeholder="Szukaj"})
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Szukaj</button>
+                }
+               
             </div>
         </div>
     </div>

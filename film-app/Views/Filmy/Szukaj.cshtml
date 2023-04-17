@@ -1,0 +1,38 @@
+﻿@model IEnumerable<film_app.Models.Film>
+@{
+    Layout = "_Layout";
+}
+
+
+<div class="text-center">
+    <p class="lista-filmow-tytul">Lista filmów, które zawierają @ViewBag.Fraza</p>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Tytuł filmu</th>
+            <th>Reżyser</th>
+            <th>Opis</th>
+            <th>Czas Trwania</th>
+            <th>Data dodania</th>
+            <th>Cena</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var film in Model)
+        {
+            <tr>
+                <td><a href="@Url.Action("Szczegoly", "Filmy", new {id = @film.Id})">@film.Tytul</a></td>
+                <td>@film.Rezyser</td>
+                <td>@film.Opis</td>
+                <td>@((film.czasTrwania != null)? (film.czasTrwania+"min."): "")</td>
+                <td>@film.DataDodania.ToShortDateString()</td>
+                <td>@((film.Cena != null)? (film.Cena+"zł"): "")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+

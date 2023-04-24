@@ -26,6 +26,7 @@
         <div class="col-auto">
             <img src="~/content/@Model.Plakat" style="height: 20rem"/>
         </div>
+        
         <div class="col col-lg-8">
             <ul class="list-group">
                 <li class="list-group-item">Tytul:<br/>@Model.Tytul</li>
@@ -37,4 +38,5 @@
             </ul>
         </div>
     </div>
+    <a class="btn btn-outline-info" type="button" style="margin-left:0.6rem" aria-current="page" href="@Url.Action("EdytujFilm", "Filmy", new{filmId=@Model.Id})">Edytuj</a>
 </div>

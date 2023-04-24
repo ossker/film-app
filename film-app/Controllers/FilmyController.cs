@@ -107,5 +107,26 @@ namespace film_app.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpGet]
+        public IActionResult EdytujFilm(int filmId)
+        {
+            var film = db.Filmy.Where(f => f.Id == filmId).FirstOrDefault();
+
+            return View(film);
+        }
+
+        [HttpPost]
+        public IActionResult EdytujFilm(Film filmEdited)
+        {
+            var film = db.Filmy.Where(f=>f.Id == filmEdited.Id).FirstOrDefault();
+            film.Tytul = filmEdited.Tytul;
+            film.Rezyser = filmEdited.Rezyser;
+            film.Opis = filmEdited.Opis;
+            film.DataDodania = DateTime.Now;
+            db.Entry(film).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Szczegoly", new {id=film.Id});
+        }
+
     }
 }

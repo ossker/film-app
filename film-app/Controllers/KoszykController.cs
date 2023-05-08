@@ -72,5 +72,18 @@ namespace film_app.Controllers
             }
             return -1;
         }
+
+        public IActionResult UsunZKoszyka(int id)
+        {
+            var model = new UsunRzeczViewModel()
+            {
+                RzeczId = id,
+                IloscRzeczy = ManagerKoszyka.UsunZKoszyka(HttpContext.Session, id),
+                WartoscKoszyka = ManagerKoszyka.UstawWartosc(HttpContext.Session)
+
+            };
+
+            return Json(model);
+        }
     }
 }

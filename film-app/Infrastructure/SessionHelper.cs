@@ -7,7 +7,7 @@ namespace film_app.Infrastructure
     {
         public static void SetObjectAsJson(this ISession session, string key, object value)
         {
-            session.SetObjectAsJson(key, JsonConvert.SerializeObject(value));
+            session.SetString(key, JsonConvert.SerializeObject(value));
         }
 
         public static T GetObjectFromJson<T>(this ISession session, string key)

@@ -4,6 +4,6 @@
     {
         public Film Film { get; set; }
         public int Ilosc { get; set; }
-        public double Wartosc { get; set; }
+        public decimal? Wartosc { get; set; }
     }
 }

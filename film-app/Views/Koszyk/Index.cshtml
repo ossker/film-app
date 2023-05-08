@@ -1,0 +1,18 @@
+﻿@model IEnumerable<film_app.Models.KoszykRzecz>
+@{
+    ViewData["Title"] = "Koszyk";
+}
+<div class="text-center">
+    @foreach (KoszykRzecz koszykRzecz in Model) 
+    {
+      <tr>
+        <td>@koszykRzecz.Film.Tytul</td>
+        <td>@koszykRzecz.Ilosc</td>
+        <td class="table-warning">@koszykRzecz.Wartosc zł</td>
+      </tr>
+    }
+
+</div>
+<div>
+    Razem: @ViewBag.CenaCalkowita zł
+</div>

@@ -4,6 +4,15 @@
     Layout = "_Layout";
 }
 <div class="text-center">
+    <table>
+    <thead>
+        <tr>
+            <th>Tytuł</th>
+            <th>Ilość</th>
+            <th>Wartość</th>
+            <th>Usuń</th>
+        </tr>
+    </thead>
     <tbody>
     @foreach (KoszykRzecz koszykRzecz in Model) 
     {
@@ -12,31 +21,37 @@
         <td>@koszykRzecz.Film.Tytul</td>
         <td><span id="itemQuantity-@koszykRzecz.Film.Id">@koszykRzecz.Ilosc</span></td>
         <td class="table-warning">@koszykRzecz.Wartosc zł</td>
-        <td ><a href="#" class="trash">&#128465</a></td>
+        <td><a href="#" class="trash" data-id="@koszykRzecz.Film.Id">&#128465</a></td>
       </tr>
     }
     </tbody>
+    </table>
 
 </div>
-<div>
-    Razem: @ViewBag.CenaCalkowita zł
+<div >
+    Razem: <span id="wartosc">@ViewBag.CenaCalkowita</span> zł
 </div>
 @section Scripts{
-    <scripts sarchive="~/lib/jquery/dist/jquery.min.js"></scripts>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript">
         $(".trash").click(function(){
-            var ElementKoszaId = $(this).data("id");
+        var ElementKoszaId = $(this).data("id");
             console.log(ElementKoszaId);
-            if(ElementKoszaId != ''){
-                $.post("/Koszyk/UsunZKoszyka", {"id":ElementKoszykaId}), function(response){
-                    if(response.IloscRzeczy == 0){
+            if(ElementKoszaId != '')
+            {
+                
+                $.post("/Koszyk/UsunZKoszyka", {"id":ElementKoszaId}, function(response)
+                {
+                    if(response.iloscRzeczy == 0){
+                        console.log("#cartItem-"+response.rzeczId);
                         $("#cartItem-"+response.rzeczId).fadeOut("slow");
                     }
                     else{
-                        $("itemQuantity-"+response.itemId).text(response.iloscRzeczy);
+                        $("#itemQuantity-"+response.rzeczId).text(response.iloscRzeczy);
                     }
-                }
-            });
+                    $("#wartosc").text(response.wartoscKoszyka);
+                });
+            };
         });
     </script>
 }

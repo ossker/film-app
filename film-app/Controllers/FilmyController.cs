@@ -1,5 +1,6 @@
 ﻿using film_app.DAL;
 using film_app.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -36,6 +37,7 @@ namespace film_app.Controllers
             return View(filmy);
         }
 
+        [Authorize]
         public IActionResult Szczegoly(int id)
         {
             var film = db.Filmy.Include("Kategoria").Where(k => k.Id == id).Single();
